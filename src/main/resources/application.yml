@@ -1,0 +1,20 @@
+server:
+  port: 9090
+
+
+
+spring:
+#  devtools:
+#    restart:
+#      enabled: false   #关闭热部署  一面feignclient调用异常
+  application:
+    name: sdk
+
+
+#开启mybatis的sql日志
+logging:
+  level:
+    root: info
+    com.hsl.sdkdemo: debug
+  file: logs/${spring.application.name}.log
+
