@@ -9,15 +9,16 @@ import org.apache.http.HttpResponse;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import static com.hsl.api.utils.HttpUtils.getGzip;
 
 /**
- * 半仙豆夫开放平台接口请求示例
+ * 书亦open-api接口请求示例
  */
 
-public class DemoMap {
+public class OpenDemoMap {
+    //开发者appsecret
+    private static final String APP_SECRET = "gRauI3jtYecJtFxs";
     //测试环境
     private static final String ORDER_URL = "https://newapi.hesiling.com";
 
@@ -26,30 +27,26 @@ public class DemoMap {
         try {
 
             String host = ORDER_URL;
-            String path = "/api/open/v3/test";
+            String path = "/api/open/v2/findOperationByCondition";
             String method = "POST";
             Map<String, String> headers = new HashMap<String, String>();
-            headers.put("messageUuid", UUID.randomUUID().toString());
+            headers.put("timestamp", "1596442941470");
             headers.put("content-type","application/json");
+
+            headers.put("accept-encoding","gzip,deflate");
 
             Map<String, String> querys = new HashMap<String, String>();
             Map<String, Object> bodys = new HashMap<String, Object>();
+            bodys.put("appId", "18266975001");
+//            bodys.put("eventName",12313);
 
             //参与签名字段集合
 
-            bodys.put("shopId",247900002);
-            bodys.put("brandId",2479);
-            bodys.put("tradeId",123456789);
-            bodys.put("channel",1);
-            bodys.put("channelDesc","ANDROID收银终端");
-            bodys.put("pickUpCode","0001");
-            bodys.put("productStatus",1);
-            bodys.put("timestamp",1600844076168L);
 
 
 
             //调用SDK方法getMapSign，生成公共参数signature的值，generatorStr：签名字段拼接，generatorSig：签名加密结果
-            SignModel signModel = SignUtil.getMapSignRSA(bodys);
+            SignModel signModel = SignUtil.getMapSign(bodys, APP_SECRET);
 
             //签名拼接字符串
             System.out.println("generatorStr : " + signModel.getGeneratorStr());
@@ -68,6 +65,7 @@ public class DemoMap {
 //            HttpEntity entity = response.getEntity();
 //            String responseContent = EntityUtils.toString(entity, "UTF-8");
                 result = getGzip(response);
+                System.out.println(result);
 
             } catch (Exception e) {
                 e.printStackTrace();
