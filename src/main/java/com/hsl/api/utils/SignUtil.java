@@ -222,7 +222,7 @@ public class SignUtil {
             }
 
             String generatorStr = sb.toString();
-            generatorSig = MD5Util.encode("",generatorStr);
+            generatorSig = MD5Util.getMd5(generatorStr);
             SignModel signModel = new SignModel();
             signModel.setGeneratorSig(generatorSig.toUpperCase());
             signModel.setGeneratorStr(generatorStr);
