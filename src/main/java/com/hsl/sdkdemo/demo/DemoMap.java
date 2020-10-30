@@ -14,7 +14,7 @@ import java.util.UUID;
 import static com.hsl.api.utils.HttpUtils.getGzip;
 
 /**
- * 半仙豆夫开放平台接口请求示例
+ * 开放平台接口请求示例
  */
 
 public class DemoMap {
